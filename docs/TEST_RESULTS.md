@@ -38,4 +38,11 @@ Order status: PAID
 
 В IntelliJ IDEA выберите JDK 25, загрузите Maven-проект и запустите весь пакет тестов `by.bseu.pp.lab03.model`. При установленном Maven из каталога проекта достаточно выполнить `mvn test`.
 
-Проверка выше выполнена средствами командной строки. Результат запуска в окне IntelliJ IDEA следует получить отдельно по инструкции [INTELLIJ_RU.md](INTELLIJ_RU.md).
+## Проверка в IntelliJ IDEA
+
+8 октября 2026 года проект открыт как Maven-проект в IntelliJ IDEA 2026.2.3 с Microsoft OpenJDK 25.0.4.1 (`ms-25`). Обе сохранённые конфигурации фактически запущены в окне IDE:
+
+- `Application`: `Order total: 2490.0`, `Order status: PAID`, `Process finished with exit code 0`.
+- `All model tests`: `76 tests passed`, `76 tests total`, `Process finished with exit code 0`.
+
+Подробная инструкция для повторного запуска: [INTELLIJ_RU.md](INTELLIJ_RU.md).
