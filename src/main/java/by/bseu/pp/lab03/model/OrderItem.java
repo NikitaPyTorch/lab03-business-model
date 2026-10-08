@@ -8,7 +8,12 @@ public class OrderItem {
     private final int quantity;
 
     public OrderItem(Product product, int quantity) {
-        // TODO: validate constructor arguments
+        if (product == null) {
+            throw new IllegalArgumentException("Product must not be null");
+        }
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Quantity must be positive");
+        }
         this.product = product;
         this.quantity = quantity;
     }
@@ -22,7 +27,6 @@ public class OrderItem {
     }
 
     public double getAmount() {
-        // TODO: delegate the calculation to Product
-        throw new UnsupportedOperationException("TODO");
+        return product.calculateAmount(quantity);
     }
 }
