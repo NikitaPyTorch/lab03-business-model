@@ -1,3 +1,20 @@
+# Лабораторная работа 3: модель предметной области на Java
+
+Проект подготовлен на основе [исходного учебного репозитория GitLab](https://gitlab.com/jaba-labs-bseu/lab03-business-model). Сохранены структура Maven-проекта, публичный API и предоставленные тесты. Требуемая версия Java - **JDK 25**; на данном компьютере доступен Microsoft OpenJDK **25.0.4.1** в `C:/Users/user/.jdks/ms-25.0.4.1`.
+
+Материалы на русском:
+
+- [Как открыть проект и запустить его в IntelliJ IDEA](docs/INTELLIJ_RU.md).
+- [Все 14 контрольных вопросов и ответы](docs/CONTROL_QUESTIONS_RU.md).
+- [Подготовка к защите: речь, объяснения, сценарии и самопроверка](docs/DEFENSE_RU.md).
+- [Фактические результаты проверки: 76 из 76 тестов, BUILD SUCCESS](docs/TEST_RESULTS.md).
+
+Все пять классов модели реализованы. `Application.main()` выводит сумму `2490.0` и статус `PAID`. В `.run` сохранены конфигурации IntelliJ IDEA `Application` и `All model tests`; после импорта Maven-проекта их можно выбрать для запуска.
+
+Ниже сохранено исходное описание проекта на английском.
+
+---
+
 # Laboratory Work 3 — Business Object Model
 
 This Maven project is used for Laboratory Work 3 in the **Industrial Programming** course.
