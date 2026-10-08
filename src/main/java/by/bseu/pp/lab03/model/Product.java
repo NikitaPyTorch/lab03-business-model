@@ -9,7 +9,15 @@ public class Product {
     private double price;
 
     public Product(String code, String name, double price) {
-        // TODO: validate constructor arguments
+        if (code == null || code.isBlank()) {
+            throw new IllegalArgumentException("Product code must not be blank");
+        }
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Product name must not be blank");
+        }
+        if (!Double.isFinite(price) || price < 0) {
+            throw new IllegalArgumentException("Price must be finite and non-negative");
+        }
         this.code = code;
         this.name = name;
         this.price = price;
@@ -28,17 +36,23 @@ public class Product {
     }
 
     public void rename(String newName) {
-        // TODO: validate and change the product name
-        throw new UnsupportedOperationException("TODO");
+        if (newName == null || newName.isBlank()) {
+            throw new IllegalArgumentException("Product name must not be blank");
+        }
+        this.name = newName;
     }
 
     public void changePrice(double newPrice) {
-        // TODO: validate and change the product price
-        throw new UnsupportedOperationException("TODO");
+        if (!Double.isFinite(newPrice) || newPrice < 0) {
+            throw new IllegalArgumentException("Price must be finite and non-negative");
+        }
+        this.price = newPrice;
     }
 
     public double calculateAmount(int quantity) {
-        // TODO: calculate price * quantity
-        throw new UnsupportedOperationException("TODO");
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Quantity must be positive");
+        }
+        return price * quantity;
     }
 }
