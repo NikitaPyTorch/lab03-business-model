@@ -13,7 +13,9 @@ public class Order {
     private Payment payment;
 
     public Order(Customer customer) {
-        // TODO: validate customer
+        if (customer == null) {
+            throw new IllegalArgumentException("Customer must not be null");
+        }
         this.customer = customer;
         this.items = new ArrayList<>();
         this.status = OrderStatus.CREATED;
@@ -36,32 +38,58 @@ public class Order {
     }
 
     public void addItem(Product product, int quantity) {
-        // TODO: items may be added only while the order is CREATED
-        throw new UnsupportedOperationException("TODO");
+        requireStatus(OrderStatus.CREATED);
+        items.add(new OrderItem(product, quantity));
     }
 
     public double total() {
-        // TODO: sum amounts of all order items
-        throw new UnsupportedOperationException("TODO");
+        double total = 0.0;
+        for (OrderItem item : items) {
+            total += item.getAmount();
+        }
+        return total;
     }
 
     public void confirm() {
-        // TODO: confirm a non-empty CREATED order for an active customer within the credit limit
-        throw new UnsupportedOperationException("TODO");
+        requireStatus(OrderStatus.CREATED);
+        if (items.isEmpty()) {
+            throw new IllegalStateException("An empty order cannot be confirmed");
+        }
+        if (!customer.canPlaceOrder(total())) {
+            throw new IllegalStateException("Customer is inactive or credit limit is exceeded");
+        }
+        status = OrderStatus.CONFIRMED;
     }
 
     public void cancel() {
-        // TODO: allow cancellation only before payment
-        throw new UnsupportedOperationException("TODO");
+        if (status != OrderStatus.CREATED && status != OrderStatus.CONFIRMED) {
+            throw new IllegalStateException("Only a created or confirmed order can be cancelled");
+        }
+        status = OrderStatus.CANCELLED;
     }
 
     public void pay(Payment payment) {
-        // TODO: accept only a successful payment for the exact total of a CONFIRMED order
-        throw new UnsupportedOperationException("TODO");
+        requireStatus(OrderStatus.CONFIRMED);
+        if (payment == null) {
+            throw new IllegalArgumentException("Payment must not be null");
+        }
+        if (!payment.isSuccessful()) {
+            throw new IllegalStateException("Payment must be successful");
+        }
+        if (Double.compare(payment.getAmount(), total()) != 0) {
+            throw new IllegalArgumentException("Payment amount must equal the order total");
+        }
+        this.payment = payment;
+        status = OrderStatus.PAID;
     }
 
     public boolean isPaid() {
-        // TODO: return true only for PAID order
-        throw new UnsupportedOperationException("TODO");
+        return status == OrderStatus.PAID;
+    }
+
+    private void requireStatus(OrderStatus expected) {
+        if (status != expected) {
+            throw new IllegalStateException("Expected order status " + expected + ", actual " + status);
+        }
     }
 }
